@@ -177,8 +177,8 @@ def main():
     # Speed uptimization for CUDA Cores /// Reduces precision
     torch.set_float32_matmul_precision('high')    
     # Configuration
-    data_dir = "C:/Users/112899/OneDrive - Grundfos/Documents/Kandidat project/Data/Spectrogram/Normal"
-    results_dir = "C:/Users/112899/OneDrive - Grundfos/Documents/Kandidat project/Code/code_outputs"
+    data_dir = "C:/Path/to/normal/data"
+    results_dir = "C:/Path/to/where/plots/will/be/saved"
     # Hyperparameters
     config = {
         'lr': args.lr,
