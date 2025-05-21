@@ -100,10 +100,10 @@ def create_test_loader(data_dir, img_size=(496, 496), batch_size=32, num_workers
 # --- Main Testing Function ---
 def test_main():
     parser = argparse.ArgumentParser(description="Test a trained Simple Autoencoder model (imports from main.py)")
-    parser.add_argument('--model_path',     type=str,   default="C:/Users/112899/OneDrive - Grundfos/Documents/Kandidat project/Code/code_outputs/Simple_AE/models/simple_ae_{}.pth",  help='Path to the saved .pth model state_dict file')
-    parser.add_argument('--data_dir',       type=str,   default=r'C:\Users\112899\OneDrive - Grundfos\Documents\Kandidat project\Data\finetuning_spec',  help='Directory containing the validation/test data (ImageFolder structure)')
-    parser.add_argument('--results_dir',    type=str,   default=r"C:\Users\112899\OneDrive - Grundfos\Documents\Kandidat project\Code\code_outputs\Simple_AE\results_plot",  help='Directory to save the output plots')
-    parser.add_argument('--plot_dir',       type=str,   default=r"C:\Users\112899\OneDrive - Grundfos\Documents\Kandidat project\Code\code_outputs\Simple_AE\results_plot", help='Directory to save plots')
+    parser.add_argument('--model_path',     type=str,   default="C:/Path/to/trained/baseline/model",  help='Path to the saved .pth model state_dict file')
+    parser.add_argument('--data_dir',       type=str,   default=r'C:\Path\to\data',  help='Directory containing the validation/test data (ImageFolder structure)')
+    parser.add_argument('--results_dir',    type=str,   default=r"C:\Path\to\where\results\are\saved",  help='Directory to save the output plots')
+    parser.add_argument('--plot_dir',       type=str,   default=r"C:\Path\to\where\plots\are\saved", help='Directory to save plots')
     parser.add_argument('--version',        type=str,   default=None,   help='Version identifier for saving plot files (e.g., the model version)')
     parser.add_argument('--lmversion',      type=int,   default=4,      help='Load model from specific trained simple model')
     parser.add_argument('--batch_size',     type=int,   default=32,     help='Batch size for evaluation')
