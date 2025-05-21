@@ -46,8 +46,8 @@ def main():
     parser.add_argument('--threshold', type=float, default=0.1, help='Threshold for classification')
     args = parser.parse_args()
     
-    model_path = f"C:\Users\runed\Documents\Dokumenter\Uni\Master_thesis\Code\Code\code_outputs\models\simple_ae_{args.version}"  # Update with the path to your model
-    image_dir = r"C:\Users\runed\Documents\Dokumenter\Uni\Master_thesis\Spectrogram\Error"  # Update with the path to your image directory
+    model_path = f"C:\Path\to\pre\trained\model"  # Update with the path to your model
+    image_dir = r"C:\Path\to\data"  # Update with the path to your image directory
     
     model = load_model(model_path)
     image_files = [f for f in os.listdir(image_dir) if f.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.gif'))]
