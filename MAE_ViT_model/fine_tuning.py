@@ -118,7 +118,7 @@ class FineTuningLightningModule(pl.LightningModule):
             try:
                 # Attempt 2: Load if .pth is a LightningModule checkpoint
                 mae_lightning_checkpoint = torch.load(mae_model_path, map_location=torch.device('cpu'))
-                self.mae_model.load_state_dict(mae_lightning_checkpoint['state_dict']) # Adjust key if necessary
+                self.mae_model.load_state_dict(mae_lightning_checkpoint['state_dict'])
                 print(f"Successfully loaded MAE state_dict from Lightning checkpoint {mae_model_path}")
             except Exception as e:
                 print(f"Could not load MAE weights from {mae_model_path}. Error: {e}")
@@ -153,16 +153,12 @@ class FineTuningLightningModule(pl.LightningModule):
 
         # Reshape to (B, grid_h, grid_w, Ph, Pw)
         patches = patches.reshape(B, grid_h, grid_w, patch_h, patch_w)
-
         # Permute to (B, grid_h, Ph, grid_w, Pw) - groups rows of patches together
         patches = patches.permute(0, 1, 3, 2, 4)
-
         # Reshape to (B, H, grid_w, Pw) - combines patch rows into image height
         patches = patches.reshape(B, img_h, grid_w, patch_w)
-
         # Reshape to (B, H, W) - combines patch columns into image width
         reconstructed_image = patches.reshape(B, img_h, img_w)
-
         # Add channel dimension: (B, H, W) -> (B, C, H, W)
         reconstructed_image = reconstructed_image.unsqueeze(1)
 
@@ -323,11 +319,11 @@ def main():
     parser.add_argument('--num_workers',    type=int,   default=4,      help='Number of dataloader workers')
     parser.add_argument('--pos_weight',     type=float, default=None,   help='Positive weight for BCE loss (default: None)')
     # Data and Model Paths
-    parser.add_argument('--data_dir',       type=str,   default=r'C:\Users\112899\OneDrive - Grundfos\Documents\Kandidat project\Data\finetuning_spec',         help='Directory containing fine-tuning data (subfolders as classes)')
-    parser.add_argument('--mae_model_dir',  type=str,   default='C:/Users/112899/OneDrive - Grundfos/Documents/Kandidat project/Code/code_outputs/version_{}',  help='Base directory where MAE models are saved (use {} for version)')
+    parser.add_argument('--data_dir',       type=str,   default=r'C:\Path\to\data',         help='Directory containing fine-tuning data (subfolders as classes)')
+    parser.add_argument('--mae_model_dir',  type=str,   default='C:/Path/to/pre/trained/MAE/ViT/model',  help='Base directory where MAE models are saved (use {} for version)')
     parser.add_argument('--mae_model_name', type=str,   default='mae_model_{}.pth', help='Filename pattern for MAE model state_dict .pth file (use {} for version)')
-    parser.add_argument('--save_dir',       type=str,   default='C:/Users/112899/OneDrive - Grundfos/Documents/Kandidat project/Code/code_outputs/fine_tuned',  help='Directory to save fine-tuned models and logs')
-    parser.add_argument('--classifier_path',type=str,   default='C:/Users/112899/OneDrive - Grundfos/Documents/Kandidat project/Code/code_outputs/fine_tuned/version_{}/anomaly_classifier_{}.pth',    help="Path to the pre-trained classifier model")
+    parser.add_argument('--save_dir',       type=str,   default='C:/Path/to/where/plots/will/be/saved',  help='Directory to save fine-tuned models and logs')
+    parser.add_argument('--classifier_path',type=str,   default='C:/Path/to/previous/trained/classifier',    help="Path to the pre-trained classifier model")
     # Visualization arguments
     parser.add_argument('--threshold',      type=float, default=0.5,    help='Threshold for classification')
     parser.add_argument('--cm_threshold',   type=float, default=6200,   help='Threshold for confusion matrix')
